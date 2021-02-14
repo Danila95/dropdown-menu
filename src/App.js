@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-import Dropdown from './Dropdown';
+import './Dropdown/dropdown.css';
+import Dropdown from './Dropdown/Dropdown';
 
 const items = [
     {
