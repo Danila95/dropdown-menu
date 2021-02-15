@@ -22,7 +22,7 @@ const items = [
         id: 4,
         value: 'Мышь',
         icon: '🖱️',
-    },
+    }
 ];
 
 function App() {
