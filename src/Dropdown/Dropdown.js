@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+const URL = 'https://raw.githubusercontent.com/Danila95/dropdown-menu/main/src/Dropdown/file.json';
 
 function Dropdown({ title, icon, items, multiSelect = false }) { // multiSelect - позволяет делать множест. выбор {true/false}
     const [open, setOpen] = useState(false); // open - переменная, которая хранит в себе состояние dropdown menu {Open / Close}
@@ -7,7 +8,25 @@ function Dropdown({ title, icon, items, multiSelect = false }) { // multiSelect 
     const [changeInput, setChangeInput] = useState(false);
     const toggle = () => setOpen(!open);
     const toggleInput = () => setChangeInput(!changeInput);
+    const dataJson = { hits: [] };
 
+    function loadJsonFile() {
+        // fetch(URL).then(response => response.json()).then(data => dataJson.setState({ hits: data }));
+        // return console.log(dataJson);
+
+        fetch(URL).then((response) => response.json()).then((data) => {
+            console.log(data);
+            // Work with JSON data here
+            dataJson.setState(data);
+        }).catch(err => {
+            // Do something for an error here
+            console.log("Error Reading data " + err);
+        });
+    }
+
+    loadJsonFile();
+    // const { hits } = dataJson;
+    // console.log(dataJson.hits);
 
     function handleOnClick(item) {
         if (!selection.some(current => current.id === item.id)) {
