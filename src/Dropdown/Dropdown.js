@@ -11,13 +11,10 @@ function Dropdown({ title, icon, items, multiSelect = false }) { // multiSelect 
     const dataJson = { hits: [] };
 
     function loadJsonFile() {
-        // fetch(URL).then(response => response.json()).then(data => dataJson.setState({ hits: data }));
-        // return console.log(dataJson);
-
         fetch(URL).then((response) => response.json()).then((data) => {
             console.log(data);
             // Work with JSON data here
-            dataJson.setState(data);
+            dataJson.setState(data); // Error Reading data TypeError: dataJson.setState is not a function
         }).catch(err => {
             // Do something for an error here
             console.log("Error Reading data " + err);
@@ -25,8 +22,6 @@ function Dropdown({ title, icon, items, multiSelect = false }) { // multiSelect 
     }
 
     loadJsonFile();
-    // const { hits } = dataJson;
-    // console.log(dataJson.hits);
 
     function handleOnClick(item) {
         if (!selection.some(current => current.id === item.id)) {
