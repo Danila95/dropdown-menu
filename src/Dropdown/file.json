@@ -1,0 +1,33 @@
+[
+    {
+      'id': '1',
+      'name': 'Vigo',
+      'picture': '.staticimagesvigo.png'
+    },
+    {
+      'id': '2',
+      'name': 'Mercedes',
+      'picture': '.staticimagesMarcedes.jpg'
+
+    },
+    {
+      'id': '3',
+      'name': 'Lexus',
+      'picture': '.staticimagesLexus.jpg'
+    },
+	{
+      'id': '4',
+      'name': 'Aston Martin',
+      'picture': '.staticimagesAstonMartin.jpg'
+    },
+	{
+      'id': '5',
+      'name': 'Audi',
+      'picture': '.staticimagesAudi.jpg'
+    },
+	{
+      'id': '6',
+      'name': 'BMW',
+      'picture': '.staticimagesBMW.jpg'
+    },
+]
