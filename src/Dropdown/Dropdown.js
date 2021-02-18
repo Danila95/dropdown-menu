@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 const URL = 'https://raw.githubusercontent.com/Danila95/dropdown-menu/main/src/Dropdown/file.json';
 
-function Dropdown({ title, icon, items, multiSelect = false }) { // multiSelect - позволяет делать множест. выбор {true/false}
+function Dropdown({ title, titleUrl, icon, items, multiSelect = false }) { // multiSelect - позволяет делать множест. выбор {true/false}
     const [open, setOpen] = useState(false); // open - переменная, которая хранит в себе состояние dropdown menu {Open / Close}
     const [selection, setSelection] = useState([]); // selection - переменная, которая показывает выбраный(е) пункт(ы)
     const [searchedItem, setSearchedItem] = useState('');
     const [changeInput, setChangeInput] = useState(false);
     const toggle = () => setOpen(!open);
+    const [loadURL, setLoadURL] = useState(false); // создаем состояние списка URl по дефолту
+    const loadUrlToggle = () => setLoadURL(!loadURL);
     const toggleInput = () => setChangeInput(!changeInput);
-    const dataJson = { hits: [] };
+    const [ dataJson, setDataJson ] = useState({
+        hits: []
+    });
 
     function loadJsonFile() {
         fetch(URL).then((response) => response.json()).then((data) => {
             console.log(data);
+            console.log(typeof data);
             // Work with JSON data here
-            dataJson.setState(data); // Error Reading data TypeError: dataJson.setState is not a function
+            setDataJson({
+                hits: data
+            });
         }).catch(err => {
             // Do something for an error here
             console.log("Error Reading data " + err);
         });
     }
-
-    loadJsonFile();
 
     function handleOnClick(item) {
         if (!selection.some(current => current.id === item.id)) {
@@ -98,6 +103,39 @@ function Dropdown({ title, icon, items, multiSelect = false }) { // multiSelect 
                                 </button>
                             </li>
                         ))}
+                </ul>
+            ) : ''}
+            <div
+                style={{marginTop: 50 + 'px'}}
+                tabIndex={0}
+                className="header"
+                role="button"
+                onKeyPress={() => toggle(!open)}
+                onClick={() => {
+                    loadUrlToggle(!loadURL);
+                    loadJsonFile();
+                }}
+            >
+                <div className="header__title">
+                    <p className="header__title--bold">{titleUrl}</p>
+                </div>
+                <div className="header__action">
+                    <p>{open ? 'Закрыть' : 'Открыть'}</p>
+                </div>
+            </div>
+            { loadURL ? (
+                <ul className="list">{
+                    dataJson.hits.map(hit => (
+                        <li className="list-item" key={hit.id}>
+                            <button type="button" onClick={() => handleOnClick(hit)}>
+                                <div className="name-elem">
+                                    <span>{hit.name}</span>
+                                    {/*<span>{hit.picture}</span>*/}
+                                </div>
+                                <span>{isItemInSelection(hit) ? '✔️' : ''}</span>
+                            </button>
+                        </li>
+                    ))}
                 </ul>
             ) : ''}
         </div>

@@ -28,8 +28,9 @@ const items = [
 function App() {
   return (
     <div className="container">
-        <Dropdown title="Выберите элемент" items={items} />
-        <Dropdown title="Выберите элементы" items={items} multiSelect/>
+        {/*<Dropdown title="Выберите элемент" items={items} />*/}
+        <Dropdown title="Выберите элемент" titleUrl="Создать список из json" items={items} multiSelect/>
+        {/*<Dropdown title="Выберите элементы" items={items} multiSelect />*/}
     </div>
   );
 }
